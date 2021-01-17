@@ -1,0 +1,11 @@
+version: '3'
+services:
+  python_opencv:
+    image: rub21/python_opencv:v1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/mnt/data
+    env_file:
+      - ./.env
