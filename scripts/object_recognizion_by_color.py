@@ -5,6 +5,14 @@ cap = cv2.VideoCapture(0)
 
 
 def printObj(img, c, title, area):
+    """Add values to print no the images, rectangle, contour, text.
+
+    Args:
+        img (array): image
+        c (arrray): Countor detected
+        title (str): Key ob the object
+        area (float): Float are
+    """
     x, y, w, h = cv2.boundingRect(c)
     # rectagle
     cv2.rectangle(img, (x + 5, y - 5), (x + w + 10, y + h - 10), (0, 255, 0), 3)
@@ -67,9 +75,6 @@ def printObj(img, c, title, area):
     cv2.drawContours(img, [c], 0, [0, 255, 0], 2, cv2.LINE_AA)
 
 
-#
-
-
 def get_obj(
     img,
     title,
@@ -78,6 +83,16 @@ def get_obj(
     obj_area,
     obj_kernel,
 ):
+    """ Find the required objects
+
+    Args:
+        img (array): array img
+        title (str): object
+        obj_color_range_lower (list): List of lower values for HSV
+        obj_color_range_upper (list):  List of upper values for HSV
+        obj_area (float): range of are to conosider
+        obj_kernel (tupple): kernet to fix the object
+    """
     lower = np.array(obj_color_range_lower)
     upper = np.array(obj_color_range_upper)
 
@@ -105,6 +120,11 @@ def get_obj(
             printObj(img, c, title, area)
 
 def adjust_colors_range():
+    """Get the HSV values to adjust the image
+
+    Returns:
+        dict: dictionary of values
+    """
     # Adjust values to get the desired object
     hMin = cv2.getTrackbarPos("Hue Minimo", "image")
     hMax = cv2.getTrackbarPos("Hue Maximo", "image")
